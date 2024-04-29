@@ -6,8 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.restfulapp.databinding.FragmentFirstBinding
 
+var adaptator = CatAdapter();
+private lateinit var recyclerView: RecyclerView
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
@@ -23,8 +27,10 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        val recyclerView:RecyclerView= _binding!!.rcView
+        binding.apply { recyclerView.layoutManager = LinearLayoutManager(context); recyclerView.adapter = adaptator}
+        //ffb = binding
         return binding.root
 
     }
@@ -32,10 +38,10 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonFirst.setOnClickListener {
-            code = binding.EditText1.text.toString();
+        /*binding.buttonFirst.setOnClickListener {
+            //code = binding.EditText1.text.toString();
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }
+        }*/
     }
 
     override fun onDestroyView() {

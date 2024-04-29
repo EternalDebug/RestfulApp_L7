@@ -11,7 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.restfulapp.databinding.ActivityMainBinding
 
-var code = "404";
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-
+        adaptator.Init();
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

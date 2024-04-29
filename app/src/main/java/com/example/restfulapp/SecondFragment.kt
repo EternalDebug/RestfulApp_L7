@@ -28,7 +28,7 @@ class SecondFragment : Fragment() {
 
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         Picasso.get()
-            .load("https://http.cat/$code")
+            .load("https://http.cat/$code_req")
             .placeholder(R.drawable.load)
             .error(R.drawable.error)
             .fit()
