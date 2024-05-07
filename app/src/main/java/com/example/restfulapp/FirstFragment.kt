@@ -5,20 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.restfulapp.databinding.FragmentFirstBinding
 
-var adaptator = CatAdapter();
 private lateinit var recyclerView: RecyclerView
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class FirstFragment : Fragment() {
-
     private var _binding: FragmentFirstBinding? = null
-
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -27,10 +25,17 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        errViewModel.httperrors.observe(viewLifecycleOwner, Observer { errs ->
+            CodeList = mutableListOf();
+            CodeList.addAll(errs);
+            CodeList.sortBy { x -> x.urlpath }
+            adaptator.notifyDataSetChanged();
+        })
+
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         val recyclerView:RecyclerView= _binding!!.rcView
         binding.apply { recyclerView.layoutManager = LinearLayoutManager(context); recyclerView.adapter = adaptator}
-        //ffb = binding
         return binding.root
 
     }
@@ -38,10 +43,10 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*binding.buttonFirst.setOnClickListener {
+        binding.buttonFirst.setOnClickListener {
             //code = binding.EditText1.text.toString();
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }*/
+        }
     }
 
     override fun onDestroyView() {

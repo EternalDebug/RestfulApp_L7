@@ -9,16 +9,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.restfulapp.databinding.CodeLayoutBinding
 
 var code_req: String = "404";
-var CodeList: MutableList<CodeOfHTTP> = mutableListOf<CodeOfHTTP>();
+//var CodeList: MutableList<CodeOfHTTP> = mutableListOf<CodeOfHTTP>();
+var CodeList: MutableList<HttpErrCode> = mutableListOf<HttpErrCode>();
 class CatAdapter : RecyclerView.Adapter<CatAdapter.TaskHolder>() {
     class TaskHolder(item: View) : RecyclerView.ViewHolder(item) {
         val binding = CodeLayoutBinding.bind(item)
-        fun bind(task: CodeOfHTTP, pos: Int) = with(binding) {
-            binding.textViewCA.setText(task.urlpath);
+        fun bind(task: HttpErrCode, pos: Int) = with(binding) {
+            binding.textViewCA.setText(task.urlpath + ": " + task.errName);
 
             val txt = itemView.findViewById<TextView>(R.id.textView_CA)
             txt.setOnClickListener {
-                code_req = task.urlpath;
+                code_req = task.urlpath!!;
 
                 txt.findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
             }
@@ -42,7 +43,9 @@ class CatAdapter : RecyclerView.Adapter<CatAdapter.TaskHolder>() {
         holder.bind(CodeList[position], position)
     }
 
-    fun Init(){
+
+
+    /*fun Init(){
         CodeList.add(CodeOfHTTP("0"));
         CodeList.add(CodeOfHTTP( "100"));
         CodeList.add(CodeOfHTTP( "101"));
@@ -119,5 +122,5 @@ class CatAdapter : RecyclerView.Adapter<CatAdapter.TaskHolder>() {
         CodeList.add(CodeOfHTTP("525"));
         CodeList.add(CodeOfHTTP("530"));
         CodeList.add(CodeOfHTTP("599"));
-    }
+    }*/
 }
